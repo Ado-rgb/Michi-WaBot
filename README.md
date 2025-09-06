@@ -59,7 +59,90 @@ Sigue estos pasos para tener Michi-WaBot funcionando en minutos:
    npm start
    ```
 
-> **Nota:** Para otros entornos (Windows, Linux, VPS), sigue pasos similares adaptando a tu sistema.
+---
+
+<details>
+  <summary>🌻 <b>INSTALACIÓN EN WINDOWS</b> 🌻</summary><br/>
+
+<a href="no disponible">
+<img src="https://img.shields.io/badge/Tutorial-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="Tutorial en YouTube"> 
+</a>
+
+---
+
+### 📦 Instalación de Dependencias
+
+1. **Instalar Git**  
+   [![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](https://git-scm.com/downloads)  
+   Descarga e instala dando *Next* en todo.
+
+2. **Instalar Node.js**  
+   [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/en/download)  
+   Descarga e instala dando *Next* en todo.
+
+3. **Instalar ImageMagick**  
+   [![ImageMagick](https://img.shields.io/badge/ImageMagick-000000?style=for-the-badge&logo=imagemagick&logoColor=white)](https://imagemagick.org/script/download.php)  
+   Durante la instalación, en **Select Additional Tasks** activa la opción:  
+   **✔ Install legacy utilities (e.g. convert)**.  
+   Luego sigue con *Next* hasta finalizar.
+
+4. **Instalar [`FFmpeg`](https://ffmpeg.org/download.html)**  
+   [![FFmpeg](https://img.shields.io/badge/FFmpeg-007808?style=for-the-badge&logo=ffmpeg&logoColor=white)](https://www.gyan.dev/ffmpeg/builds/)  
+   - Descarga y descomprime.  
+   - Renombra la carpeta a **FFmpeg**.
+   - Crea una carpeta en `C:\Bots`
+   - Mueve la carpeta a: `C:\Bots\FFmpeg`.  
+   - Entra en `C:\Bots\FFmpeg\bin` y copia la ruta.  
+   - En el buscador de Windows escribe **"Editar las variables de entorno del sistema"** y ábrelo.  
+   - En la ventana que aparece ve a **Variables de entorno** → selecciona **Path** 2 veces en Varibles del Usuario → **Nuevo** → pega la ruta copiada.  
+   - Acepta (tres veces) hasta guardar.  
+   - Abre `cmd` como Administrador y navega:  
+     ```bash
+     cd ..
+     ```
+     hasta llegar a `C:\`  
+     Luego:
+     ```bash
+     cd Bots
+     ```
+   - Verifica que todas las instalaciones funcionan:  
+     ```bash
+     git --version; node -v; magick -version; ffmpeg -version
+     ```
+
+---
+
+### 🚀 Configuración del Proyecto
+
+5. **Clona el Repositorio del Bot**
+   ```bash
+   git clone https://github.com/Ado-rgb/Michi-WaBot.git
+   ```
+
+6. **Accede al Directorio del Proyecto**
+   ```bash
+   cd Michi-WaBot
+   ```
+
+7. **Instala las Dependencias de Node.js**
+   ```bash
+   npm install
+   ```
+
+8. **Inicia el Bot**
+   ```bash
+   npm start
+   ```
+  - **Instalación rápida (opcional)**  
+     ```bash
+    git clone https://github.com/Ado-rgb/Michi-WaBot.git; cd Michi-WaBot; npm install; npm start
+     ```
+
+---
+
+   © **CORPORACIÓN KFG**  2018-2025  
+
+</details>
 
 ---
 
