@@ -24,7 +24,8 @@
 
 ---
 
-## 📲 Instalación Rápida en Termux (Android)
+<details>
+  <summary>📲 <b>Instalación Rápida en Termux (Android)</b> 📲</summary><br/>
 
 Sigue estos pasos para tener Michi-WaBot funcionando en minutos:
 
@@ -58,6 +59,7 @@ Sigue estos pasos para tener Michi-WaBot funcionando en minutos:
    ```bash
    npm start
    ```
+</details>
 
 ---
 
