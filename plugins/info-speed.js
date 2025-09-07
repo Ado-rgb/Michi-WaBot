@@ -68,7 +68,7 @@ var handler = async (m, { conn }) => {
 
 handler.help = ['speed']
 handler.tags = ['info']
-handler.command = ['speed']
+handler.command = ['speed','sped']
 
 export default handler
 
