@@ -109,7 +109,7 @@ Sigue estos pasos para tener Michi-WaBot funcionando en minutos:
      ```
    - Verifica que todas las instalaciones funcionan:  
      ```bash
-     git --version; node -v; magick -version; ffmpeg -version
+     git --version & node -v & magick -version & ffmpeg -version
      ```
 
 ---
@@ -137,7 +137,7 @@ Sigue estos pasos para tener Michi-WaBot funcionando en minutos:
    ```
   - **Instalación rápida (opcional)**  
      ```bash
-    git clone https://github.com/Ado-rgb/Michi-WaBot.git; cd Michi-WaBot; npm install; npm start
+    git clone https://github.com/Ado-rgb/Michi-WaBot.git & cd Michi-WaBot & npm install & npm start
      ```
 
 ---
