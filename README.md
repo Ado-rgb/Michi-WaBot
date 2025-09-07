@@ -140,9 +140,9 @@ Sigue estos pasos para tener Michi-WaBot funcionando en minutos:
     git clone https://github.com/Ado-rgb/Michi-WaBot.git & cd Michi-WaBot & npm install & npm start
      ```
 
-> ⚠️ Nota importante:  
-> Si usas **PowerShell**, separa los comandos con `;`.  
-> Si usas **CMD**, separa los comandos con `&`.
+>⚠️ Nota importante:  
+>Si usas **PowerShell**, separa los comandos con `;`.  
+>Si usas **CMD**, separa los comandos con `&`.
 
 ---
 
