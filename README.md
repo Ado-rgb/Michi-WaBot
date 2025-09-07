@@ -142,7 +142,7 @@ Sigue estos pasos para tener Michi-WaBot funcionando en minutos:
 
 >⚠️ Nota importante:  
 >Si usas **PowerShell**, separa los comandos con `;`.  
->Si usas **CMD**, separa los comandos con `&` o simplemente copia los comandos tal como aparecen en la sección de **instalación rapida opcional**.
+>Si usas **CMD**, separa los comandos con `&` o simplemente copia los comandos tal como aparecen en la sección de **instalación rápida opcional**.
 
 ---
 
