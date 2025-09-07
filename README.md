@@ -25,7 +25,7 @@
 ---
 
 <details>
-  <summary>📲 <b>Instalación Rápida en Termux (Android)</b> 📲</summary><br/>
+  <summary>📲 <b>INSTALACIÓN RÁPIDA EN TERMUX (ANDROID)</b> 📲</summary><br/>
 
 Sigue estos pasos para tener Michi-WaBot funcionando en minutos:
 
