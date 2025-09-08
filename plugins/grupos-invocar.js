@@ -90,5 +90,5 @@ handler.help = ['tag']
 handler.tags = ['group']
 handler.group = true
 handler.admin = true
-handler.botAdmin = true
+handler.botAdmin = false
 export default handler
