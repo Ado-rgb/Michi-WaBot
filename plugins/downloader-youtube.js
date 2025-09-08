@@ -64,7 +64,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     }
 
     const format = isAudio ? 'audio' : 'video'
-    const apiUrl = `https://myapiadonix.casacam.net/download/yt?url=${encodeURIComponent(url)}&format=${format}`
+    const apiUrl = `https://myapiadonix.casacam.net/download/yt?apikey=AdonixKeyaf2lqp0837&url=${encodeURIComponent(url)}&format=${format}`
     const res = await fetch(apiUrl)
     const json = await res.json()
 
