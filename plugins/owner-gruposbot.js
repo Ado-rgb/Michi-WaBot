@@ -9,9 +9,13 @@ const handler = async (m, { conn }) => {
     for (let i = 0; i < groups.length; i++) {
       const [jid] = groups[i];
 
-      // Obtener metadata del grupo
-      const groupMetadata =
-        (conn.chats[jid]?.metadata || (await conn.groupMetadata(jid).catch(() => null))) || {};
+      // Obtener metadata del grupo forzando la carga
+      let groupMetadata;
+      try {
+        groupMetadata = await conn.groupMetadata(jid);
+      } catch {
+        groupMetadata = { participants: [] };
+      }
 
       const participants = groupMetadata.participants || [];
 
