@@ -15,10 +15,17 @@ const handler = async (m, { conn }) => {
 
       const participants = groupMetadata.participants || [];
 
-      // Verificar si el bot está en el grupo y si es admin
-      const bot = participants.find((u) => conn.decodeJid(u.id) === conn.user.jid) || {};
-      const isBotAdmin = !!bot.admin;
-      const isParticipant = participants.some((u) => conn.decodeJid(u.id) === conn.user.jid);
+      // Verificar si el bot está en el grupo
+      const isParticipant = participants.some(
+        (u) => conn.decodeJid(u.id) === conn.user.jid
+      );
+
+      // Verificar si el bot es admin
+      const bot = participants.find(
+        (u) => conn.decodeJid(u.id) === conn.user.jid
+      );
+      const isBotAdmin = !!(bot?.admin);
+
       const participantStatus = isParticipant ? '👤 Participante' : '❌ Ex participante';
       const totalParticipants = participants.length;
 
