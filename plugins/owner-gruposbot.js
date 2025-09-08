@@ -14,13 +14,15 @@ const handler = async (m, { conn }) => {
         (conn.chats[jid]?.metadata || (await conn.groupMetadata(jid).catch(() => null))) || {};
 
       const participants = groupMetadata.participants || [];
+
+      // Verificar si el bot está en el grupo y si es admin
       const bot = participants.find((u) => conn.decodeJid(u.id) === conn.user.jid) || {};
       const isBotAdmin = !!bot.admin;
       const isParticipant = participants.some((u) => conn.decodeJid(u.id) === conn.user.jid);
       const participantStatus = isParticipant ? '👤 Participante' : '❌ Ex participante';
       const totalParticipants = participants.length;
 
-      // Generar link si es admin
+      // Generar link solo si el bot es admin
       let groupLink = '--- (No admin) ---';
       if (isBotAdmin) {
         try {
