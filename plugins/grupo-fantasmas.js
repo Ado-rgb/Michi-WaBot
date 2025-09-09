@@ -2,9 +2,9 @@ import { areJidsSameUser } from '@whiskeysockets/baileys'
 
 var handler = async (m, { conn, text, participants, args, command }) => {
 
-  const emoji = '❐'
-  const emoji2 = '✧'
-  const msm = '✩ Aviso:'
+  const emoji = '🌲'
+  const emoji2 = '🎍'
+  const msm = '🌾 𝗔𝗏𝗂𝗌𝗈 ›'
 
   let member = participants.map(u => u.id)
   let sum = !text ? member.length : text
@@ -62,7 +62,6 @@ handler.tags = ['group']
 handler.command = ['fantasmas', 'kickfantasmas']
 handler.help = ['fantasmas', 'kickfantasmas']
 handler.group = true
-handler.botAdmin = true
 handler.admin = true
 
 
