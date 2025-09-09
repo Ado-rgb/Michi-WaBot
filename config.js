@@ -18,7 +18,7 @@ global.author = '𝖡𝗎𝗂𝗅𝗍 𝖡𝖸 𝖠𝖽𝗈 | © 2025'
 global.moneda = '𝖬𝖺𝗇𝗓𝖺𝗇𝖺𝗌 🍎'
 global.api = { 
 url: 'https://myapiadonix.casacam.net',
-key: 'AdonixKeyaf2lqp0837'
+key: 'Adofreekey'
 }
 
 
