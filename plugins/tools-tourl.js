@@ -20,7 +20,7 @@ let handler = async (m, { conn }) => {
     txt += `*🎍 Tamaño total* » ${formatBytes(media.length)}\n`;
     txt += `*🐊 Expira en* »${isTele ? 'No expira' : 'Desconocido'}\n\n`;
     
-    await conn.sendFile(m.chat, media, 'thumbnail.jpg', txt, m, fkontak);
+    await conn.sendFile(m.chat, media, 'thumbnail.jpg', txt, m, rcanal);
     
     await m.react("✅");
   } catch {
