@@ -1,32 +1,85 @@
-import axios from 'axios'
+import axios from 'axios';
 
-let handler = async (m, { conn, text }) => {
-  if (!text) return m.reply('📎 *Por favor ingresa un enlace de Mediafire*')
-  if (!/^https?:\/\/.*mediafire\.com/.test(text)) return m.reply('❗ Ingresa un enlace válido de *Mediafire*')
-
+function isValidMediafireUrl(url) {
   try {
-    // Reacciona con el reloj mientras procesa
-    await conn.sendMessage(m.chat, { react: { text: '🕓', key: m.key } })
-
-    const apiUrl = `https://delirius-apiofc.vercel.app/download/mediafire?url=${encodeURIComponent(text)}`
-    const res = await axios.get(apiUrl)
-    const { filename, size, extension, link } = res.data.data
-
-    await conn.sendFile(
-      m.chat,
-      link,
-      filename,
-      `✅ *Nombre:* ${filename}\n📦 *Tamaño:* ${size}\n📄 *Tipo:* ${extension || 'desconocido'}`,
-      m
-    )
-  } catch (err) {
-    console.error(err)
-    m.reply('❌ Ocurrió un error al procesar el enlace o la API está caída.')
+    const parsed = new URL(url);
+    const hostOk = parsed.hostname.includes('mediafire.com');
+    const pathOk = parsed.pathname.includes('/file/');
+    const queryOk = parsed.search.length > 1;
+    return hostOk && (pathOk || queryOk);
+  } catch {
+    return false;
   }
 }
 
-handler.help = ['mediafire']
-handler.tags = ['downloader']
-handler.command = ['mediafire']
-handler.register = false
-export default handler
+let handler = async (m, { conn, args, usedPrefix, command }) => {
+  try {
+    if (!args[0]) {
+      return m.reply(
+        `🏝️ Ingresa un enlace de un archivo de mediafire o un titulo.`
+      );
+    }
+
+    const input = args.join(' ');
+    const isValidUrl = isValidMediafireUrl(input);
+
+
+    let mediafireUrl = input;
+
+    if (!isValidUrl) {
+      const searchRes = await axios.get(`https://api.stellarwa.xyz/search/mediafire?query=${encodeURIComponent(input)}&apikey=Diamond`);
+      const searchData = searchRes.data;
+
+      if (!searchData.status || !searchData.results?.length) {
+        return m.reply('🌾 No se encontraron resultados para tu búsqueda.');
+      }
+
+      const result = searchData.results[Math.floor(Math.random() * searchData.results.length)];
+      mediafireUrl = result.url;
+    }
+
+    const response = await axios.get(`https://api.stellarwa.xyz/dow/mediafire?url=${mediafireUrl}&apikey=Diamond`);
+    const data = response.data;
+
+    if (!data.status || !data.data) {
+      return m.reply('☁️ No se pudo procesar el enlace.');
+    }
+
+    const { title, peso, fecha, tipo, dl } = data.data;
+
+    const info = `🌴 *Información:*\n\n` +
+      `📄 *Nombre:* ${title}\n` +
+      `📦 *Peso:* ${peso}\n` +
+      `📅 *Fecha:* ${fecha}\n` +
+      `📁 *Tipo:* ${tipo}\n\n` +
+      `🔗 *Enlace directo:* ${dl}`;
+
+    await conn.sendMessage(m.chat, { text: info }, { quoted: m });
+
+    if (!/GB|gb/.test(peso)) {
+      await conn.sendMessage(
+        m.chat,
+        {
+          document: { url: dl },
+          mimetype: tipo,
+          fileName: title,
+        },
+        { quoted: m }
+      );
+    } else {
+      await conn.sendMessage(m.chat, {
+        text: `🍫 *Hubo un error, el archivo supera el límite permitido para el envio.*`
+      }, { quoted: m });
+    }
+
+  } catch (error) {
+    console.error(error);
+    m.reply(`🌵 *Error:* ${error.message}`);
+  }
+};
+
+handler.help = ['mediafire', 'mf'];
+handler.tags = ['downloader'];
+handler.command = ['mediafire', 'mf'];
+
+export default handler;
