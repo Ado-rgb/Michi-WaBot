@@ -12,15 +12,18 @@ global.owner = [
 global.mods = []
 global.prems = []
 
-global.namebot = '🌤 𝖬𝗂𝖼𝗁𝗂 𝖶𝖺𝖡𝗈𝗍'
-global.packname = '𝖬𝗂𝖼𝗁𝗂 ° 𝖶𝖺 🥞'
-global.author = '𝖡𝖸 𝖠𝖽𝗈 | © 2025 ❄'
+global.namebot = '🪲 𝖬𝗂𝖼𝗁𝗂 - BOT'
+global.packname = '🐥 𝖬𝗂𝖼𝗁𝗂𝖬𝖣'
+global.author = '𝖡𝗎𝗂𝗅𝗍 𝖡𝖸 𝖠𝖽𝗈 | © 2025'
 global.moneda = '𝖬𝖺𝗇𝗓𝖺𝗇𝖺𝗌 🍎'
-
+global.api = { 
+url: 'https://myapiadonix.casacam.net',
+key: 'AdonixKeyaf2lqp0837'
+}
 
 
 global.libreria = 'Baileys'
-global.baileys = 'V 6.7.16'
+global.baileys = 'Personalizada'
 global.vs = '2.2.0'
 global.sessions = 'Sessions'
 global.jadi = 'JadiBots'
