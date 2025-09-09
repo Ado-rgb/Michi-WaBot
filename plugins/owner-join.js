@@ -40,7 +40,7 @@ const handler = async (m, {conn, text, isMods, isOwner, isPrems}) => {
                 renderLargerThumbnail: true, 
                 title: global.author, 
                 mediaType: 1, 
-                thumbnail: './storage/img/menu2.jpg, 
+                thumbnail: './storage/img/menu2.jpg', 
                 mediaUrl: `${link}`, 
                 sourceUrl: `${link}`
               }
