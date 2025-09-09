@@ -48,11 +48,11 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     const { title, peso, fecha, tipo, dl } = data.data;
 
     const info = `🌴 *Información:*\n\n` +
-      `📄 *Nombre:* ${title}\n` +
-      `📦 *Peso:* ${peso}\n` +
-      `📅 *Fecha:* ${fecha}\n` +
-      `📁 *Tipo:* ${tipo}\n\n` +
-      `🔗 *Enlace directo:* ${dl}`;
+      `> 📄 *Nombre:* ${title}\n` +
+      `> 📦 *Peso:* ${peso}\n` +
+      `> 📅 *Fecha:* ${fecha}\n` +
+      `> 📁 *Tipo:* ${tipo}\n\n` +
+      `> 🔗 *Enlace directo:* ${dl}`;
 
     await conn.sendMessage(m.chat, { text: info }, { quoted: m });
 
