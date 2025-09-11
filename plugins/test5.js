@@ -54,8 +54,8 @@ let handler = async (m, { conn, usedPrefix, command }) => {
 
   // Mandar botones para continuar
   await conn.sendMessage(m.chat, {
-    text: "", //👉 Pulsa el botón para la siguiente pregunta
-    footer: "", //Doraemon Quiz
+    text: "👉 Pulsa el botón para la siguiente pregunta",
+    footer: "Doraemon Quiz",
     buttons: [
       { buttonId: `${usedPrefix + command}`, buttonText: { displayText: "📩 Siguiente" }, type: 1 }
     ],
