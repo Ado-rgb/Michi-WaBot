@@ -3,7 +3,9 @@
 
 let handler = async (m, { conn }) => {
     try {
-        if (!m.quoted) return m.reply('❌ Debes responder al mensaje que deseas eliminar con .del');
+        if (!m.quoted || !m.quoted.key) {
+            return m.reply('❌ Debes responder a un mensaje válido con .del');
+        }
 
         const msgId = m.quoted.key.id;
         const chatId = m.chat;
@@ -19,5 +21,6 @@ let handler = async (m, { conn }) => {
 };
 
 handler.command = ['del'];
-handler.rowner = true;
+handler.rowner = false;
+handler.owner = true;
 export default handler;
