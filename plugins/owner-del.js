@@ -3,15 +3,18 @@
 
 let handler = async (m, { conn }) => {
     try {
-        if (!m.quoted || !m.quoted.key) {
+        const quoted = m.quoted;
+        if (!quoted || !quoted.key) {
             return m.reply('❌ Debes responder a un mensaje válido con .del');
         }
 
-        const msgId = m.quoted.key.id;
-        const chatId = m.chat;
+        // Detecta correctamente el id y el chat
+        const msgId = quoted.key.id || quoted.key.remoteJid;
+        const chatId = m.chat || quoted.key.remoteJid;
+        const fromMe = quoted.key.fromMe || false;
 
         await conn.sendMessage(chatId, {
-            delete: { id: msgId, remoteJid: chatId, fromMe: m.quoted.key.fromMe }
+            delete: { id: msgId, remoteJid: chatId, fromMe: fromMe }
         });
 
     } catch (error) {
