@@ -13,7 +13,7 @@ ${usedPrefix + command} https://www.tiktok.com/@usuario/video/123456789`,
   try {
     await conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key } })
 
-    let apiURL = `https://myapiadonix.casacam.net/download/tiktok?url=${encodeURIComponent(args[0])}`
+    let apiURL = `https://myapiadonix.casacam.net/download/tiktok?apikey=Adofreekey&url=${encodeURIComponent(args[0])}`
     let response = await fetch(apiURL)
     let data = await response.json()
 
