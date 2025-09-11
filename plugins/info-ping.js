@@ -26,7 +26,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
               hasMediaAttachment: false
             }),
             nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-              buttons: [
+              */buttons: [
                 {
                   name: 'quick_reply',
                   buttonParamsJson: JSON.stringify({
@@ -41,7 +41,7 @@ let handler = async (m, { conn, usedPrefix, command }) => {
                     id: `${usedPrefix + command}`
                   })
                 }
-              ]
+              ]*/
             })
           })
         }
