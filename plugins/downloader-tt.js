@@ -1,37 +1,38 @@
 import fetch from 'node-fetch'
 
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-  if (!args[0]) return m.reply({
-    text: `📥 Uso correcto:
-${usedPrefix + command} <enlace válido de TikTok>
-
-Ejemplo:
-${usedPrefix + command} https://www.tiktok.com/@usuario/video/123456789`,
-    ...global.rcanal
-  })
+  if (!args[0]) {
+    return conn.sendMessage(m.chat, {
+      text: `֯　ׅ🍃ֶ֟፝֯ㅤ *Uso correcto:*\n> _${usedPrefix + command} <enlace válido de TikTok>_\n\n֯　ׅ🍃ֶ֟፝֯ㅤ *Ejemplo:*\n> _${usedPrefix + command} https://www.tiktok.com/@usuario/video/123456789_`,
+      ...global.rcanal
+    }, { quoted: m })
+  }
 
   try {
     await conn.sendMessage(m.chat, { react: { text: '🕒', key: m.key } })
 
-    let apiURL = `https://myapiadonix.casacam.net/download/tiktok?apikey=Adofreekey&url=${encodeURIComponent(args[0])}`
-    let response = await fetch(apiURL)
-    let data = await response.json()
+    const apiURL = `https://myapiadonix.casacam.net/download/tiktok?apikey=Adofreekey&url=${encodeURIComponent(args[0])}`
+    const response = await fetch(apiURL)
+    const data = await response.json()
 
-    if (!data.success || !data.result?.video) 
+    if (!data.status || !data.data?.video) {
       throw new Error('No se pudo obtener el video')
+    }
 
-    let info = data.result
+    const info = data.data
 
-    let caption = `
-📌 *${info.title}*
-👤 Autor: *@${info.author?.username || 'Desconocido'}*
-⏱️ Duración: *${info.duration || 'N/D'}s*
+    const caption = `
+﹡ ﹟ 🌹 ׄ ⬭ TikTok Downloader
 
-📊 Estadísticas:
-♥ Likes: *${info.likes?.toLocaleString() || 0}*
-💬 Comentarios: *${info.comments?.toLocaleString() || 0}*
-🔁 Compartidos: *${info.shares?.toLocaleString() || 0}*
-👁️ Vistas: *${info.views?.toLocaleString() || 0}*
+𓏸𓈒ㅤׄ *Título ›* ${info.title}
+𓏸𓈒ㅤׄ *Autor ›* @${info.author?.username || 'Desconocido'}
+𓏸𓈒ㅤׄ *Duración ›* ${info.duration || 'N/D'}s
+
+🍂ᯭ⁾ ꤥㅤꤪꤨEstadísticasꤪꤨ
+♥ *Likes:* ${info.likes?.toLocaleString() || 0}
+💬 *Comentarios:* ${info.comments?.toLocaleString() || 0}
+🔁 *Compartidos:* ${info.shares?.toLocaleString() || 0}
+👁️ *Vistas:* ${info.views?.toLocaleString() || 0}
     `.trim()
 
     await conn.sendMessage(m.chat, {
@@ -47,10 +48,10 @@ ${usedPrefix + command} https://www.tiktok.com/@usuario/video/123456789`,
   } catch (err) {
     console.error(err)
     await conn.sendMessage(m.chat, { react: { text: '❌', key: m.key } })
-    m.reply({
-      text: '❌ No se pudo procesar el video. Intenta nuevamente más tarde.',
+    await conn.sendMessage(m.chat, {
+      text: `𓏸𓈒ㅤׄ *Error ›* No se pudo procesar el video. Intenta nuevamente más tarde.`,
       ...global.rcanal
-    })
+    }, { quoted: m })
   }
 }
 
