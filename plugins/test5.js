@@ -1,37 +1,38 @@
-//--> Hecho por GianPoolS (github.com/GianPoolS)
+//[##]Creado por GianPoolS - github.com/GianPoolS
+//[##]No quites los créditos
 
 let handler = async (m, { conn }) => {
   // Preguntas tipo encuesta
   let encuestas = [
     {
-      name: "📘 ¿Quién es el creador de Doraemon?",
-      options: ["A) Fujiko F. Fujio", "B) Akira Toriyama", "C) Osamu Tezuka"]
+      pregunta: "📘 ¿Quién es el creador de Doraemon?",
+      opciones: ["Fujiko F. Fujio", "Akira Toriyama", "Osamu Tezuka"]
     },
     {
-      name: "📘 ¿Qué color era originalmente Doraemon?",
-      options: ["A) Rojo", "B) Amarillo", "C) Verde"]
+      pregunta: "📘 ¿Qué color era originalmente Doraemon?",
+      opciones: ["Rojo", "Amarillo", "Verde"]
     },
     {
-      name: "📘 ¿Cuál es la comida favorita de Doraemon?",
-      options: ["A) Dorayaki", "B) Sushi", "C) Ramen"]
+      pregunta: "📘 ¿Cuál es la comida favorita de Doraemon?",
+      opciones: ["Dorayaki", "Sushi", "Ramen"]
     },
     {
-      name: "📘 ¿Cómo se llama el mejor amigo de Doraemon?",
-      options: ["A) Nobita", "B) Suneo", "C) Shizuka"]
+      pregunta: "📘 ¿Cómo se llama el mejor amigo de Doraemon?",
+      opciones: ["Nobita", "Suneo", "Shizuka"]
     },
     {
-      name: "📘 ¿De dónde viene Doraemon?",
-      options: ["A) Del futuro", "B) De otro planeta", "C) De un laboratorio"]
+      pregunta: "📘 ¿De dónde viene Doraemon?",
+      opciones: ["Del futuro", "De otro planeta", "De un laboratorio"]
     }
   ]
 
-  // Enviar las 5 encuestas una por una
+  // Enviar las 5 encuestas
   for (let e of encuestas) {
     await conn.sendMessage(m.chat, {
       poll: {
-        name: e.name,
-        options: e.options,
-        selectableOptionsCount: 1 // Solo una opción por persona
+        name: e.pregunta,       // Título de la encuesta
+        values: e.opciones,     // Opciones (string[])
+        selectableCount: 1      // Solo 1 voto por persona
       }
     })
   }
