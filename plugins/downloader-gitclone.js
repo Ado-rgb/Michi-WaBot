@@ -12,11 +12,11 @@ let handler = async (m, { args, conn }) => {
   const dev = 'Ado'
 
   if (!args[0]) {
-    return conn.reply(m.chat, `${emoji} Por favor, ingresa la URL de un repositorio de GitHub que deseas descargar.`, m)
+    return conn.reply(m.chat, `✦ Ingresa la URL de un *repositorio de GitHub* que quieras descargar.`, m)
   }
 
   if (!regex.test(args[0])) {
-    await conn.reply(m.chat, `${emoji2} Verifica que la *URL* sea de GitHub`, m)
+    await conn.reply(m.chat, `✦ Verifica que la *URL* sea válida de GitHub 🐙`, m)
     return m.react(error)
   }
 
@@ -37,12 +37,12 @@ let handler = async (m, { args, conn }) => {
     const filename = filenameMatch ? filenameMatch[1] : `${sanitizedRepo}.zip`
     const img = 'https://raw.githubusercontent.com/The-King-Destroy/Adiciones/main/Contenido/1745610598914.jpeg'
 
-    let txt = `*GITHUB  -  DOWNLOAD*\n\n`
-    txt += `🍿  *Nombre:* ${sanitizedRepo}\n`
-    txt += `🧃  *Repositorio:* ${user}/${sanitizedRepo}\n`
-    txt += `🥞  *Creador:* ${repoData.owner.login}\n`
-    txt += `🍂  *Descripción:* ${repoData.description || 'Sin descripción disponible'}\n`
-    txt += `🌴  *URL:* ${args[0]}`
+    let txt = `> *_Repositorio de GitHub_* 
+✩ *Nombre*: ${sanitizedRepo}
+✩ *Repositorio*: ${user}/${sanitizedRepo}
+✩ *Creador*: ${repoData.owner.login}
+✩ *Descripción*: ${repoData.description || 'Sin descripción disponible'}
+✩ *URL*: ${args[0]}`
 
     await conn.sendFile(m.chat, img, 'thumbnail.jpg', txt, m)
     await conn.sendFile(m.chat, await zipResponse.buffer(), filename, null, m, rcanal)
@@ -58,6 +58,5 @@ let handler = async (m, { args, conn }) => {
 handler.help = ['gitclone']
 handler.tags = ['downloader']
 handler.command = ['gitclone']
-
 
 export default handler
