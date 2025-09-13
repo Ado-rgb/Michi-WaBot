@@ -23,14 +23,14 @@ const tags = {
 
 const defaultMenu = {
   before: `
-✐ Hola Soy *%botname* ( *%tipo* )
-
-*❐ Comandos:*
+╭─「 ✧ Hola Soy *%botname* *%tipo* 」
+│
+│ *❐ Comandos:*
 `,
 
-  header: '» ✐ *%category* ✩\n╭━─━───────━─━',
-  body: '┊ ✐ %cmd %islimit %isPremium',
-  footer: '╰--------------------≫',
+  header: '├─ ✐ *%category* ✩',
+  body: '│ ┊ ✐ %cmd %islimit %isPremium',
+  footer: '╰───────────────────',
   after: '\n✩ ❐ Creador: Ado ✐'
 }
 
@@ -116,7 +116,7 @@ const handler = async (m, { conn, usedPrefix: _p }) => {
       (_, name) => String(replace[name])
     )
 
-    await conn.sendMessage(m.chat, { react: { text: '✐', key: m.key } })
+    await conn.sendMessage(m.chat, { react: { text: '🐯', key: m.key } })
 
     await conn.sendMessage(
       m.chat,
