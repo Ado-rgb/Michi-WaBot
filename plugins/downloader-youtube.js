@@ -43,14 +43,14 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const canal = author.name || 'Desconocido'
 
     const infoMessage = `
-𓏸𓈒ㅤׄ *YouTube Play ›* 😼
+> ❐ *_YouTube - Play_* 
 
-🌾 *Título:* ${title}
-👤 *Canal:* ${canal}
-🌾 *Vistas:* ${vistas}
-⏱️ *Duración:* ${timestamp}
-🍃 *Subido:* ${ago}
-🦆 *Enlace:* ${url}
+✩ *Título*: ${title}
+✩ *Canal*: ${canal}
+✩ *Vistas*: ${vistas}
+✩ *Duración*: ${timestamp}
+✩ *Subido*: ${ago}
+✩ *Enlace*: ${url}
     `.trim()
 
     const thumb = (await conn.getFile(thumbnail))?.data
@@ -90,7 +90,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
         video: { url: downloadUrl },
         mimetype: 'video/mp4',
         fileName: `${title}.mp4`,
-        caption: '🐸 *Descarga completada.*',
+        caption: '🐸 *Descarga completada.*\n> *Aquí tienes tu video.*',
         ...global.rcanal
       }, { quoted: m })
     }
@@ -111,8 +111,8 @@ export default handler
 
 function formatViews(views) {
   if (views === undefined) return "No disponible"
-  if (views >= 1_000_000_000) return `${(views / 1_000_000_000).toFixed(1)}🅱 (${views.toLocaleString()})`
-  if (views >= 1_000_000) return `${(views / 1_000_000).toFixed(1)}🅼 (${views.toLocaleString()})`
-  if (views >= 1_000) return `${(views / 1_000).toFixed(1)}🅺 (${views.toLocaleString()})`
+  if (views >= 1_000_000_000) return `${(views / 1_000_000_000).toFixed(1)}B (${views.toLocaleString()})`
+  if (views >= 1_000_000) return `${(views / 1_000_000).toFixed(1)}M (${views.toLocaleString()})`
+  if (views >= 1_000) return `${(views / 1_000).toFixed(1)}K (${views.toLocaleString()})`
   return views.toString()
 }
