@@ -1,17 +1,5 @@
-//--> Hecho por Ado-rgb (github.com/Ado-rgb)
-// •|• No quites créditos..
 import fetch from 'node-fetch'
 import FormData from 'form-data'
-
-async function uploadImage(buffer) {
-  const form = new FormData()
-  form.append('fileToUpload', buffer, 'image.jpg')
-  form.append('reqtype', 'fileupload')
-
-  const res = await fetch('https://catbox.moe/user/api.php', { method: 'POST', body: form })
-  if (!res.ok) throw new Error('Error al subir la imagen')
-  return await res.text()
-}
 
 let handler = async (m, { conn, usedPrefix, command }) => {
   try {
@@ -42,18 +30,18 @@ let handler = async (m, { conn, usedPrefix, command }) => {
     let img = await q.download?.()  
     if (!img) throw new Error('No pude descargar la imagen.')  
 
-    let uploadedUrl = await uploadImage(img)  
+    const formData = new FormData()
+    formData.append('fileToUpload', img, 'image.jpg')
+    formData.append('reqtype', 'fileupload')
 
-    // --> Usar la nueva API
-    const apiUrl = `https://myapiadonix.vercel.app/tools/upscale?url=${encodeURIComponent(uploadedUrl)}`  
-    const res = await fetch(apiUrl)  
-    if (!res.ok) throw new Error(`Error en la API: ${res.statusText}`)  
-    const data = await res.json()  
+    const uploadRes = await fetch('https://catbox.moe/user/api.php', { method: 'POST', body: formData })
+    if (!uploadRes.ok) throw new Error('Error al subir la imagen')
+    const uploadedUrl = await uploadRes.text()
 
-    if (!data.status || !data.result) throw new Error('No se pudo mejorar la imagen.')  
-
-    const improvedRes = await fetch(data.result)  
-    const buffer = await improvedRes.buffer()  
+    const apiUrl = `https://myapiadonix.casacam.net/canvas/hd?apikey=Adofreekey&url=${encodeURIComponent(uploadedUrl)}`
+    const res = await fetch(apiUrl)
+    if (!res.ok) throw new Error('Error al mejorar la imagen')
+    const buffer = await res.buffer()
 
     await conn.sendMessage(m.chat, {  
       image: buffer,  
