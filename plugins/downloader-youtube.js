@@ -8,8 +8,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
   try {
     if (!text?.trim()) {
       return conn.sendMessage(m.chat, {
-        text: `֯　ׅ🍃ֶ֟፝֯ㅤ *Uso correcto:*\n> _${usedPrefix + command} <link o nombre del video>_`,
-        ...global.rcanal
+        text: `> *_Uso correcto_* 🍃\n✩ ${usedPrefix + command} <link o nombre del video>`,
       }, { quoted: m })
     }
 
@@ -25,8 +24,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
 
     if (!ytplay2 || ytplay2.length === 0) {
       return conn.sendMessage(m.chat, {
-        text: '🍂 No se encontraron resultados.',
-        ...global.rcanal
+        text: `> *_YouTube - Play_* 🎶\n✩ No se encontraron resultados.`,
       }, { quoted: m })
     }
 
@@ -43,7 +41,7 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     const canal = author.name || 'Desconocido'
 
     const infoMessage = `
-> ❐ *_YouTube - Play_* 
+> *_YouTube - Play_* 
 
 ✩ *Título*: ${title}
 ✩ *Canal*: ${canal}
@@ -54,15 +52,14 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
     `.trim()
 
     const thumb = (await conn.getFile(thumbnail))?.data
-    await conn.sendMessage(m.chat, { image: thumb, caption: infoMessage, ...global.rcanal }, { quoted: m })
+    await conn.sendMessage(m.chat, { image: thumb, caption: infoMessage }, { quoted: m })
 
     const isAudio = ['play', 'yta', 'ytmp3', 'playaudio'].includes(command)
     const isVideo = ['play2', 'ytv', 'ytmp4', 'mp4'].includes(command)
 
     if (!isAudio && !isVideo) {
       return conn.sendMessage(m.chat, {
-        text: '🌾 Comando no reconocido.',
-        ...global.rcanal
+        text: `> *_YouTube - Play_* 🎶\n✩ Comando no reconocido.`,
       }, { quoted: m })
     }
 
@@ -81,25 +78,21 @@ const handler = async (m, { conn, text, usedPrefix, command }) => {
       await conn.sendMessage(m.chat, {
         audio: { url: downloadUrl },
         mimetype: 'audio/mpeg',
-        fileName: `${title}.mp3`,
-        ptt: true,
-        ...global.rcanal
+        fileName: `${title}.mp3`
       }, { quoted: m })
     } else if (isVideo) {
       await conn.sendMessage(m.chat, {
         video: { url: downloadUrl },
         mimetype: 'video/mp4',
         fileName: `${title}.mp4`,
-        caption: '🐸 *Descarga completada.*\n> *Aquí tienes tu video.*',
-        ...global.rcanal
+        caption: `> *_YouTube - Play_* 🎶\n✩ Descarga completada.`,
       }, { quoted: m })
     }
 
   } catch (error) {
     console.error('[ERROR YOUTUBE]', error)
     return conn.sendMessage(m.chat, {
-      text: `❌ Ocurrió un error: ${error.message || error}`,
-      ...global.rcanal
+      text: `> *_YouTube - Play_* 🎶\n✩ Error: ${error.message || error}`,
     }, { quoted: m })
   }
 }
@@ -111,8 +104,8 @@ export default handler
 
 function formatViews(views) {
   if (views === undefined) return "No disponible"
-  if (views >= 1_000_000_000) return `${(views / 1_000_000_000).toFixed(1)}B (${views.toLocaleString()})`
-  if (views >= 1_000_000) return `${(views / 1_000_000).toFixed(1)}M (${views.toLocaleString()})`
-  if (views >= 1_000) return `${(views / 1_000).toFixed(1)}K (${views.toLocaleString()})`
+  if (views >= 1_000_000_000) return `${(views / 1_000_000_000).toFixed(1)}🅱 (${views.toLocaleString()})`
+  if (views >= 1_000_000) return `${(views / 1_000_000).toFixed(1)}🅼 (${views.toLocaleString()})`
+  if (views >= 1_000) return `${(views / 1_000).toFixed(1)}🅺 (${views.toLocaleString()})`
   return views.toString()
 }
