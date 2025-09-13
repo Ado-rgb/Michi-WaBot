@@ -1,82 +1,47 @@
-/**
- * Comando: .apk
- * Autor: Ado-rgb
- * Repositorio: github.com/Ado-rgb
- * 🚫 No quitar créditos
- */
+import { search, download } from 'aptoide-scraper'
 
-import fetch from 'node-fetch'
+var handler = async (m, { conn, text }) => {
+    if (!text) return conn.reply(m.chat, `✩ Por favor, ingrese el nombre de la apk para descargarla.`, m)
+    try {
+        await m.react("🕓") 
 
-let handler = async (m, { conn, usedPrefix, command, text }) => {
-  if (!text) {
-    return conn.sendMessage(m.chat, {
-      text: `⚡ Ingresa el nombre de la aplicación que quieres buscar.\n\n📌 Ejemplo:\n${usedPrefix + command} Facebook Lite`
-    }, { quoted: m })
-  }
+        let searchA = await search(text)
+        let data5 = await download(searchA[0].id)
 
-  try {
-    // reacción al iniciar búsqueda
-    await conn.sendMessage(m.chat, { react: { text: "🔍", key: m.key } })
+        let txt = `> *_APT - DESCARGAS_*\n\n`
+        txt += `✩ *Nombre*: ${data5.name}\n`
+        txt += `✩ *Package*: ${data5.package}\n`
+        txt += `✩ *Ultima Actualizacion*: ${data5.lastup}\n`
+        txt += `✩ *Peso*: ${data5.size}`
 
-    let results = await aptoide.search(text)
-    if (!results.length) {
-      return conn.sendMessage(m.chat, { text: "⚠️ No se encontraron resultados para tu búsqueda. Intenta con un nombre diferente." }, { quoted: m })
+        await conn.sendFile(m.chat, data5.icon, 'thumbnail.jpg', txt, m)
+
+        if (data5.size.includes('GB') || parseFloat(data5.size.replace(' MB', '')) > 999) {
+            await m.react(error) 
+            return conn.reply(m.chat, `✩ El archivo es demasiado pesado, supera el límite permitido de descarga.`, m)
+        }
+
+        await conn.sendMessage(
+            m.chat,
+            {
+                document: { url: data5.dllink },
+                mimetype: 'application/vnd.android.package-archive',
+                fileName: data5.name + '.apk',
+                caption: `> ✩ Descarga completa.`
+            },
+            { quoted: fkontak }
+        )
+
+        await m.react(done) 
+    } catch {
+        await m.react(error)
+        return conn.reply(m.chat, `✩ Ocurrió un fallo...`, m)
     }
-
-    let app = results[0]
-    let data = await aptoide.download(app.id)
-    let dl = await conn.getFile(data.link)
-
-    await conn.sendMessage(m.chat, {
-      document: dl.data,
-      fileName: `${data.appname}.apk`,
-      mimetype: 'application/vnd.android.package-archive',
-      caption: `✅ *APK Descargado*\n\n📱 *Nombre:* ${data.appname}\n👨‍💻 *Desarrollador:* ${data.developer}\n📦 *Versión:* ${app.version}\n📊 *Tamaño:* ${(app.size / (1024 * 1024)).toFixed(2)} MB`
-    }, { quoted: m })
-
-    // reacción al terminar
-    await conn.sendMessage(m.chat, { react: { text: "✅", key: m.key } })
-
-  } catch (e) {
-    console.error(e)
-    conn.sendMessage(m.chat, { text: "❌ Ocurrió un error al descargar el APK. Intenta de nuevo más tarde." }, { quoted: m })
-    await conn.sendMessage(m.chat, { react: { text: "❌", key: m.key } })
-  }
 }
 
-handler.help = ["apk"]
-handler.tags = ["downloader"]
-handler.command = /^apk$/i
-handler.register = false
+handler.tags = ['descargas']
+handler.help = ['apkmod']
+handler.command = ['apk', 'modapk', 'aptoide']
+handler.group = true
 
 export default handler
-
-const aptoide = {
-  search: async function (query) {
-    let res = await fetch(`https://ws75.aptoide.com/api/7/apps/search?query=${encodeURIComponent(query)}&limit=1`)
-    res = await res.json()
-    if (!res.datalist?.list?.length) return []
-
-    return res.datalist.list.map((v) => ({
-      name: v.name,
-      size: v.size,
-      version: v.file?.vername || "N/A",
-      id: v.package,
-      download: v.stats?.downloads || 0
-    }))
-  },
-
-  download: async function (id) {
-    let res = await fetch(`https://ws75.aptoide.com/api/7/apps/search?query=${encodeURIComponent(id)}&limit=1`)
-    res = await res.json()
-    if (!res.datalist?.list?.length) throw new Error("App no encontrada")
-
-    const app = res.datalist.list[0]
-    return {
-      img: app.icon,
-      developer: app.store?.name || "Desconocido",
-      appname: app.name,
-      link: app.file?.path
-    }
-  }
-}
